@@ -49,8 +49,8 @@ resource "azurerm_mssql_database" "sql-Database" {
   server_id      = azurerm_mssql_server.sql-server.id
   collation      = var.sql-Database.collation
   license_type   = var.sql-Database.license_type
-  max_size_gb    = 4
-  read_scale     = true
+  max_size_gb    = 5
+  read_scale     = false
   sku_name       = var.sql-Database.sku_name
   zone_redundant = false
 }
@@ -80,9 +80,9 @@ resource "azurerm_linux_web_app" "webapp175" {
 
 #Random password
 resource "random_password" "password" {
-  length  = 16
-  special = false
+  length  = 12
+  special = true
   numeric = true
-  upper   = false
-  lower   = false
+  upper   = true
+  lower   = true
 }
