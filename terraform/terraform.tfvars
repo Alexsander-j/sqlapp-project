@@ -2,7 +2,7 @@
 
 #resource group
 resource_group = {
-  location = "east us"
+  location = "japan east"
   name     = "sql-rg"
 }
 
