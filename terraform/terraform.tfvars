@@ -6,6 +6,27 @@ resource_group = {
   name     = "sql-rg"
 }
 
+#sql-storage-account
+sql-storage-account = {
+  account_replication_type = "LRS"
+  account_tier             = "Standard"
+  name                     = "sqlaccount175963"
+}
+
+#sql-server
+sql-server = {
+  name    = "sqlserver486152684512385"
+  version = "12.0"
+}
+
+#sql-database
+sql-Database = {
+  collation    = "SQL_Latin1_General_CP1_CI_AS"
+  license_type = "LicenseIncluded"
+  name         = "sqldatabase175963"
+  sku_name     = "S0"
+}
+
 #azure web app
 webapp = {
   webapp_name       = "sqlapp175"

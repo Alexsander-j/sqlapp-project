@@ -8,6 +8,33 @@ variable "resource_group" {
   })
 }
 
+#storage account
+variable "sql-storage-account" {
+  type = object({
+    name                     = string
+    account_replication_type = string
+    account_tier             = string
+  })
+}
+
+#Mysql Server
+variable "sql-server" {
+  type = object({
+    name    = string
+    version = string
+  })
+}
+
+#Mysql Database
+variable "sql-Database" {
+  type = object({
+    name         = string
+    collation    = string
+    license_type = string
+    sku_name     = string
+  })
+}
+
 #azure webapp
 variable "webapp" {
   type = object({
