@@ -1,4 +1,7 @@
-﻿using sqlapp.Models;
+﻿using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
+using sqlapp.Models;
+using StackExchange.Redis;
 using System.Data.SqlClient;
 
 namespace sqlapp.Services
@@ -7,44 +10,59 @@ namespace sqlapp.Services
     // This service will interact with our Product data in the SQL database
     public class ProductService : IProductService
     {
-        private readonly IConfiguration _configuration;
-        public ProductService(IConfiguration configuration)
+        private readonly IConnectionMultiplexer _redis;
+        public ProductService(IConnectionMultiplexer redis)
         {
-            _configuration = configuration;
+            _redis = redis;
         }
         private SqlConnection GetConnection()
         {
-            string connectionString = "Server=tcp:sqlserver486152684512385.database.windows.net,1433;Initial Catalog=sqldatabase175963;Persist Security Info=False;User ID=4dm1n157r470r;Password=sa!\u0026+k4pstnR;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            string connectionString = "Server=tcp:sqlserver486152684512385.database.windows.net,1433;Initial Catalog=sqldatabase175963;Persist Security Info=False;User ID=4dm1n157r470r;Password=sa!&+k4pstnR;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             return new SqlConnection(connectionString);
         }
-        public List<Product> GetProducts()
+        public async Task<List<Products>> GetProducts()
         {
-            List<Product> _product_lst = new List<Product>();
-            string _statement = "SELECT ProductID,ProductName,Quantity from Products";
-            SqlConnection _connection = GetConnection();
+            List<Products> _product_lst = new List<Products>();
+            IDatabase database = _redis.GetDatabase();
+            string key = "productlist";
 
-            _connection.Open();
-
-            SqlCommand _sqlcommand = new SqlCommand(_statement, _connection);
-
-            using (SqlDataReader _reader = _sqlcommand.ExecuteReader())
+            if (await database.KeyExistsAsync(key))
             {
-                while (_reader.Read())
+                long listLenght = database.ListLength(key);
+                for (int i = 0; i < listLenght; i++)
                 {
-                    Product _product = new Product()
-                    {
-                        ProductID = _reader.GetInt32(0),
-                        ProductName = _reader.GetString(1),
-                        Quantity = _reader.GetInt32(2)
-                    };
-
-                    _product_lst.Add(_product);
+                    string value = database.ListGetByIndex(key, i);
+                    Products product = JsonConvert.DeserializeObject<Products>(value);
+                    _product_lst.Add(product);
                 }
+                return _product_lst;
             }
-            _connection.Close();
-            return _product_lst;
+            else
+            {
+                string _statement = "SELECT ProductId,ProductName,Quantity from Products";
+                SqlConnection _connection = GetConnection();
+
+                _connection.Open();
+
+                SqlCommand _sqlCommand = new SqlCommand(_statement, _connection);
+
+                using (SqlDataReader _reader = _sqlCommand.ExecuteReader())
+                {
+                    while (_reader.Read())
+                    {
+                        Products _product = new Products()
+                        {
+                            ProductID = _reader.GetInt32(0),
+                            ProductName = _reader.GetString(1),
+                            Quantity = _reader.GetInt32(2)
+                        };
+                        database.ListRightPush(key, JsonConvert.SerializeObject(_product));
+                        _product_lst.Add(_product);
+                    }
+                }
+                _connection.Close();
+                return _product_lst;
+            }
         }
-
     }
-}
-
+};

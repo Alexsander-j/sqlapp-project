@@ -1,9 +1,11 @@
 using sqlapp.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace sqlapp.Services
 {
     public interface IProductService
     {
-        List<Product> GetProducts();
+        Task<List<Products>> GetProducts();
     }
 }
