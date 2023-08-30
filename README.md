@@ -4,6 +4,10 @@ Here, an app will add tables to an MySql database, and query it to show a web pa
 
 ![](https://github.com/nokorinotsubasa/sqlapp-project/blob/dd09d71579deaf415e8529674d4e15ef7eb2fba7/images/Architecture.png)
 
+>`Architecture`
+
+The app is an ASP.Net running in C#
+
 All the resources will be deployed with Terraform.
 
 The app will be build with Jenkins, which will be used as CI for an Azure DevOps environment.
