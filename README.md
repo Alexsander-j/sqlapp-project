@@ -19,7 +19,7 @@ The app will be build with Jenkins, which will be used as CI for an Azure DevOps
 - To see how to use docker containers as Jenkins agents, [click here](https://github.com/nokorinotsubasa/jenkins-docker-agent)
 
 
-### Steps
+## Steps
 
 - First, let's run `terraform` to deploy all the resources we need; the Virtual machines will run script extensions upon creation, to speed up the process;
 
@@ -49,9 +49,21 @@ Don't forget to start the ssh agent:
 
 >`eval ssh-agent`
 
+![]()
+
+>`GitHub ssh key configuration`
+
+![]()
+
+>`Jenkins GitHub credential configuration`
+
 - Set up docker `cloud provider` on Jenkins, for the container agents. Remember to correctly set the agent Vm IP;
 
+![]()
+
 - Create a new Job on Jenkins of type pipeline, set the source code as: `Source code from scm` and set github ssh credentials and connection.
+
+![]()
 
 - Now, follow [this link](https://github.com/nokorinotsubasa/CI-jenkins-azure) to integrate Jenkins into Azure;
 
@@ -61,21 +73,43 @@ Don't forget to start the ssh agent:
 
 - Correctly set the required fields, `REMEMBER THAT THE JOB NAME IS THE EXACTLY JOB NAME OF THE JENKINS JOB`;
 
+![]()
+
+>`Pipeline configuration`
+
 - Create a `Release Pipeline` on azure, and select the Azure web app job, insert the app service type, name and framework;
 
 - Configure the artifact source, in our case: `build`;
 
+![]()
+
+>`Release Pipeline Configuration`
+
 - Activate the `Continuous Delivery` trigger;
 
-- Head back into `Pipelines` and set the `Continuous Integration` trigger (GitHub commit)
+![]()
+
+>`Release Pipeline trigger`
+
+- Head back into `Pipelines` and set the `Continuous Integration` trigger (GitHub commit);
+
+![]()
+
+>`CI trigger`
 
 - Now, upon running the Pipeline, it will queue the Jenkins job, building the app and generating the `artifact`, this will be downloaded into the build pipeline on Azure DevOps, to be later used;
 
+![]()
+
+>`Azure, Jenkins job logs`
+
 - The Release Pipeline will start running, this will download the artifact from the build, and deploy the app into our `Azure App Service`.
 
+![]()
 
+>`Release Pipeline logs`
 
-### Final result
+## Final result
 
 - Now, when accessing the web page, you will get a list of products; On every approved commit, a pipeline will run, building and deploying a new version of the app, thanks to CI/CD integration.
 
@@ -83,6 +117,6 @@ Don't forget to start the ssh agent:
 
 >`app's web page`
 
-### Persist Jenkins data
+## Persist Jenkins data
 
-- To Persist Jenkins data, [click here](https://github.com/nokorinotsubasa/tar-jenkins-docker)
+- To know how to persist Jenkins data, [click here](https://github.com/nokorinotsubasa/tar-jenkins-docker)
