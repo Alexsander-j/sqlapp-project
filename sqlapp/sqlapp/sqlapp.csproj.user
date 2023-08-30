@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <NameOfLastUsedPublishProfile>C:\2022\Azure-Recorded\AZ-204\4. Develop Azure compute solutions - Containers\16. Setting up MySQL on Azure\sqlapp\sqlapp\Properties\PublishProfiles\sqlapp340059 - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
-  </PropertyGroup>
-</Project>
