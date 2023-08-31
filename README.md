@@ -18,8 +18,18 @@ The app will be build with Jenkins, which will be used as CI for an Azure DevOps
 
 - To see how to use docker containers as Jenkins agents, [click here](https://github.com/nokorinotsubasa/jenkins-docker-agent)
 
+## Code configuration
 
-## Steps
+- Azure Key Vault
+
+- Add the redis connection string on `Program.cs`
+
+![]()
+
+>`Redis configuration on code`
+
+
+## Jenkins Configuration
 
 - First, let's run `terraform` to deploy all the resources we need; the Virtual machines will run script extensions upon creation, to speed up the process;
 
@@ -41,13 +51,13 @@ The public key goes into the github settings; the private key into the jenkins c
 
 you need to add it into the `known_hosts_file`, to do this:
 
->`ssh github-key-temp >> ~/.ssh/known_hosts`
-
 >`ssh-keyscan github.com >> ~/.ssh/known_hosts`
 
 Don't forget to start the ssh agent:
 
 >`eval ssh-agent`
+
+![]()
 
 ![]()
 
@@ -67,7 +77,17 @@ Don't forget to start the ssh agent:
 
 - Now, follow [this link](https://github.com/nokorinotsubasa/CI-jenkins-azure) to integrate Jenkins into Azure;
 
-- Now on Azure, with Jenkins and GitHub service connection, create a new Pipeline, select `Pipeline template`;
+## Database configuration
+
+- Access the databse and run the `script.sql` (it can be found on this repository)
+
+![]()
+
+>`script.sql query`
+
+## Azure DevOps configuration
+
+- Now on Azure DevOps, with Jenkins and GitHub service connection, create a new Pipeline, select `Pipeline template`;
 
 - Search and select `Jenkins`;
 
