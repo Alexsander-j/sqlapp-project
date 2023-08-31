@@ -20,7 +20,7 @@ The app will be build with Jenkins, which will be used as CI for an Azure DevOps
 
 - Remember to allow connections on the sql server Networking configuration, also, enable `Allow Azure services and resources to access this server`:
 
-![]()
+![](https://github.com/nokorinotsubasa/sqlapp-project/blob/0757e355b58ec77612a7a17a9b13901115b95f42/images/sqlservernetworkingconfiguration.png)
 
 ## Code configuration
 
