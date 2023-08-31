@@ -1,4 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using Azure.Core;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+using Newtonsoft.Json;
 using sqlapp.Models;
 using StackExchange.Redis;
 using System.Data.SqlClient;
@@ -16,7 +19,17 @@ namespace sqlapp.Services
         }
         private SqlConnection GetConnection()
         {
-            string connectionString = "Server=tcp:sqlserver486152684512385.database.windows.net,1433;Initial Catalog=sqldb4621789317;Persist Security Info=False;User ID=4dm1n157r470r;Password=ohww3hMAGLGZ;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            string keyvaultUrl = "https://sqlkeyvault485612878.vault.azure.net/";
+            string secretName = "dbconnectionstring";
+
+            TokenCredential tokenCredential = new DefaultAzureCredential();
+            SecretClient secretClient = new SecretClient(new Uri(keyvaultUrl), tokenCredential);
+
+            var secret = secretClient.GetSecret(secretName);
+
+            string connectionString = secret.Value.Value;
+
+
             return new SqlConnection(connectionString);
         }
         public async Task<List<Product>> GetProducts()

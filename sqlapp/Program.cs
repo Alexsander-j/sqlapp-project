@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-string connectionString = "rediscache4564589.redis.cache.windows.net:6380,password=wb48aPMoTQzVBedn7enyFHln8xI5nTwtvAzCaGCSWJc=,ssl=True,abortConnect=False";
+string connectionString = "rediscache592027.redis.cache.windows.net:6380,password=q9ZQotxnmal1FafJd6rJdAoaCs8JIWYPZAzCaJeJ2s8=,ssl=True,abortConnect=False";
 var multiplexer = ConnectionMultiplexer.Connect(connectionString);
 builder.Services.AddSingleton<IConnectionMultiplexer>(multiplexer);
 builder.Services.AddTransient<IProductService, ProductService>();
