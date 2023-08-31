@@ -2,7 +2,7 @@
 
 Here, an app will interact with tables with an MsSql database, and query it to show a web page with the table.
 
-![](https://github.com/nokorinotsubasa/sqlapp-project/blob/67ee50b744618708649f5cae0c5db5b26ec72041/images/Architecture.png)
+![](https://github.com/nokorinotsubasa/sqlapp-project/blob/3f473716a1d020cc1638ed70c9aaf7e434f28deb/images/Architecture.png)
 
 >`Architecture`
 
@@ -24,11 +24,11 @@ The app will be build with Jenkins, which will be used as CI for an Azure DevOps
 
 - Add the sql server connection string on `ProductService`
 
-![]()
+![](https://github.com/nokorinotsubasa/sqlapp-project/blob/3f473716a1d020cc1638ed70c9aaf7e434f28deb/images/codeconnectionstringproductservice.png)
 
 - Add the redis connection string on `Program.cs`
 
-![]()
+![](https://github.com/nokorinotsubasa/sqlapp-project/blob/3f473716a1d020cc1638ed70c9aaf7e434f28deb/images/codeconnectionstringProgramcs.png)
 
 >`Redis configuration on code`
 
@@ -51,7 +51,7 @@ In the Vm, generate ssh keys:
 
 >`ssh-keygen -t rsa`
 
-The public key goes into the github settings; the private key into the jenkins credentials settings;
+The `public` key goes into the `github settings`; the `private key` into the `jenkins credentials settings`;
 
 you need to add it into the `known_hosts_file`, to do this:
 
@@ -61,23 +61,21 @@ Don't forget to start the ssh agent:
 
 >`eval ssh-agent`
 
-![]()
-
-![]()
+![](https://github.com/nokorinotsubasa/sqlapp-project/blob/3f473716a1d020cc1638ed70c9aaf7e434f28deb/images/githubsshkeyconfiguration.png)
 
 >`GitHub ssh key configuration`
 
-![]()
+![](https://github.com/nokorinotsubasa/sqlapp-project/blob/3f473716a1d020cc1638ed70c9aaf7e434f28deb/images/sshgithubcredentials.png)
 
 >`Jenkins GitHub credential configuration`
 
 - Set up docker `cloud provider` on Jenkins, for the container agents. Remember to correctly set the agent Vm IP;
 
-![]()
+![](https://github.com/nokorinotsubasa/sqlapp-project/blob/3f473716a1d020cc1638ed70c9aaf7e434f28deb/images/jenkinscloudconfiguration.png)
 
 - Create a new Job on Jenkins of type pipeline, set the source code as: `Source code from scm` and set github ssh credentials and connection.
 
-![]()
+![](https://github.com/nokorinotsubasa/sqlapp-project/blob/3f473716a1d020cc1638ed70c9aaf7e434f28deb/images/jenkinspipelinejobcreation.png)
 
 - Now, follow [this link](https://github.com/nokorinotsubasa/CI-jenkins-azure) to integrate Jenkins into Azure;
 
@@ -85,7 +83,7 @@ Don't forget to start the ssh agent:
 
 - Access the databse and run the `script.sql` (it can be found on this repository)
 
-![]()
+![](https://github.com/nokorinotsubasa/sqlapp-project/blob/3f473716a1d020cc1638ed70c9aaf7e434f28deb/images/sqlquery.png)
 
 >`script.sql query`
 
@@ -97,7 +95,7 @@ Don't forget to start the ssh agent:
 
 - Correctly set the required fields, `REMEMBER THAT THE JOB NAME IS THE EXACTLY JOB NAME OF THE JENKINS JOB`;
 
-![]()
+![](https://github.com/nokorinotsubasa/sqlapp-project/blob/3f473716a1d020cc1638ed70c9aaf7e434f28deb/images/pipelineconfiguration.png)
 
 >`Pipeline configuration`
 
@@ -105,25 +103,25 @@ Don't forget to start the ssh agent:
 
 - Configure the artifact source, in our case: `build`;
 
-![]()
+![](https://github.com/nokorinotsubasa/sqlapp-project/blob/3f473716a1d020cc1638ed70c9aaf7e434f28deb/images/releasepipelineartifact.png)
 
 >`Release Pipeline Configuration`
 
 - Activate the `Continuous Delivery` trigger;
 
-![]()
+![](https://github.com/nokorinotsubasa/sqlapp-project/blob/3f473716a1d020cc1638ed70c9aaf7e434f28deb/images/CDtrigger.png)
 
 >`Release Pipeline trigger`
 
 - Head back into `Pipelines` and set the `Continuous Integration` trigger (GitHub commit);
 
-![]()
+![](https://github.com/nokorinotsubasa/sqlapp-project/blob/3f473716a1d020cc1638ed70c9aaf7e434f28deb/images/pipelineCItrigger.png)
 
 >`CI trigger`
 
 - Now, upon running the Pipeline, it will queue the Jenkins job, building the app and generating the `artifact`, this will be downloaded into the build pipeline on Azure DevOps, to be later used;
 
-![]()
+![](https://github.com/nokorinotsubasa/sqlapp-project/blob/3f473716a1d020cc1638ed70c9aaf7e434f28deb/images/queuejenkinsjob.png)
 
 >`Azure, Jenkins job logs`
 
