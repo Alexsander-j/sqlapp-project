@@ -4,7 +4,7 @@ pipeline {
     stage('clean'){
       steps {
         //clean the workspace and build code
-        sh 'dotnet clean /var/jenkins_home/workspace/jenkins-test/jenkins-web'
+        sh 'dotnet clean /var/jenkins_home/workspace/jenkins-test/sqlapp'
       }
     }
       stage('restore, publish and deploy to azure'){
