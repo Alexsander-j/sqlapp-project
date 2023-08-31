@@ -127,7 +127,7 @@ Don't forget to start the ssh agent:
 
 - The Release Pipeline will start running, this will download the artifact from the build, and deploy the app into our `Azure App Service`.
 
-![]()
+![](https://github.com/nokorinotsubasa/sqlapp-project/blob/3d0c81ca1aa756061160f8c9be589a957b3945f1/images/releasePipelineLogs.png)
 
 >`Release Pipeline logs`
 
@@ -135,7 +135,7 @@ Don't forget to start the ssh agent:
 
 - Now, when accessing the web page, you will get a list of products; On every approved commit, a pipeline will run, building and deploying a new version of the app, thanks to CI/CD integration.
 
-![]()
+![](https://github.com/nokorinotsubasa/sqlapp-project/blob/3d0c81ca1aa756061160f8c9be589a957b3945f1/images/appwebpage.png)
 
 >`app's web page`
 
