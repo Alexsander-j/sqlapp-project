@@ -27,7 +27,7 @@ The app will be build with Jenkins, which will be used as CI for an Azure DevOps
 
 - Procede with jenkins configuration, create an admin user, download `Docker`, `github` and `azure cli` plugins;
 
-![]()
+![](https://github.com/nokorinotsubasa/sqlapp-project/blob/8bafa6628e01c232b53da50478748c2a7eaf5004/images/unlockJenkins.png)
 
 >you can get the initial password with: `sudo docker logs jenkins`
 
