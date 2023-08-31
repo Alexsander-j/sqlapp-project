@@ -40,9 +40,9 @@ The app will be build with Jenkins, which will be used as CI for an Azure DevOps
 
 ![](https://github.com/nokorinotsubasa/sqlapp-project/blob/6a06e56d911b6e3387153833441605544b215cb9/images/accesspolicyconfiguration.png)
 
-- Add the redis connection string on `Program.cs`
+- Add the redis connection string on `Program.cs` by referencing the keyvault:
 
-![](https://github.com/nokorinotsubasa/sqlapp-project/blob/3f473716a1d020cc1638ed70c9aaf7e434f28deb/images/codeconnectionstringProgramcs.png)
+![]()
 
 >`Redis configuration on code`
 
