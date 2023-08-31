@@ -26,19 +26,19 @@ The app will be build with Jenkins, which will be used as CI for an Azure DevOps
 
 - Create a `Key Vault` and generate a secret, reference it on the code:
 
-![]()
+![](https://github.com/nokorinotsubasa/sqlapp-project/blob/6a06e56d911b6e3387153833441605544b215cb9/images/keyvaultreference.png)
 
 - Head into App Service and click on `Identity`;
 
 - Enable `System Assigned Managed Identity`
 
-![]()
+![](https://github.com/nokorinotsubasa/sqlapp-project/blob/6a06e56d911b6e3387153833441605544b215cb9/images/enablesystemassigned.png)
 
 - Go into the key vault and head into `Access Policies` and add an access policy;
 
 - Select the `Service Principal and save`:
 
-![]()
+![](https://github.com/nokorinotsubasa/sqlapp-project/blob/6a06e56d911b6e3387153833441605544b215cb9/images/accesspolicyconfiguration.png)
 
 - Add the redis connection string on `Program.cs`
 
