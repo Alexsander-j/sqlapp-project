@@ -18,7 +18,7 @@ The app will be build with Jenkins, which will be used as CI for an Azure DevOps
 
 - To see how to use docker containers as Jenkins agents, [click here](https://github.com/nokorinotsubasa/jenkins-docker-agent)
 
-- Remember to allow connections on the sql server Networking configuration:
+- Remember to allow connections on the sql server Networking configuration, also, enable `Allow Azure services and resources to access this server`:
 
 ![]()
 
