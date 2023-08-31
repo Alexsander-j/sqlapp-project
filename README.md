@@ -18,13 +18,27 @@ The app will be build with Jenkins, which will be used as CI for an Azure DevOps
 
 - To see how to use docker containers as Jenkins agents, [click here](https://github.com/nokorinotsubasa/jenkins-docker-agent)
 
+- Remember to allow connections on the sql server Networking configuration:
+
+![]()
+
 ## Code configuration
 
-- Azure Key Vault
+- Create a `Key Vault` and generate a secret, reference it on the code:
 
-- Add the sql server connection string on `ProductService`
+![]()
 
-![](https://github.com/nokorinotsubasa/sqlapp-project/blob/3f473716a1d020cc1638ed70c9aaf7e434f28deb/images/codeconnectionstringproductservice.png)
+- Head into App Service and click on `Identity`;
+
+- Enable `System Assigned Managed Identity`
+
+![]()
+
+- Go into the key vault and head into `Access Policies` and add an access policy;
+
+- Select the `Service Principal and save`:
+
+![]()
 
 - Add the redis connection string on `Program.cs`
 
