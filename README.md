@@ -22,6 +22,10 @@ The app will be build with Jenkins, which will be used as CI for an Azure DevOps
 
 - Azure Key Vault
 
+- Add the sql server connection string on `ProductService`
+
+![]()
+
 - Add the redis connection string on `Program.cs`
 
 ![]()
