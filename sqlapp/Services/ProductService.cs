@@ -1,5 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using sqlapp.Models;
 using StackExchange.Redis;
 using System.Data.SqlClient;
@@ -20,9 +19,9 @@ namespace sqlapp.Services
             string connectionString = "Server=tcp:sqlserver486152684512385.database.windows.net,1433;Initial Catalog=sqldb4621789317;Persist Security Info=False;User ID=4dm1n157r470r;Password=ohww3hMAGLGZ;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             return new SqlConnection(connectionString);
         }
-        public async Task<List<Products>> GetProducts()
+        public async Task<List<Product>> GetProducts()
         {
-            List<Products> _product_lst = new List<Products>();
+            List<Product> _product_lst = new List<Product>();
             IDatabase database = _redis.GetDatabase();
             string key = "productlist";
 
@@ -32,7 +31,7 @@ namespace sqlapp.Services
                 for (int i = 0; i < listLenght; i++)
                 {
                     string value = database.ListGetByIndex(key, i);
-                    Products product = JsonConvert.DeserializeObject<Products>(value);
+                    Product product = JsonConvert.DeserializeObject<Product>(value);
                     _product_lst.Add(product);
                 }
                 return _product_lst;
@@ -50,7 +49,7 @@ namespace sqlapp.Services
                 {
                     while (_reader.Read())
                     {
-                        Products _product = new Products()
+                        Product _product = new Product()
                         {
                             ProductID = _reader.GetInt32(0),
                             ProductName = _reader.GetString(1),
