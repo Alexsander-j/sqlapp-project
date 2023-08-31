@@ -255,6 +255,31 @@ resource "azurerm_virtual_machine_extension" "agentVm" {
   depends_on         = [azurerm_linux_virtual_machine.agentVm2]
 }
 
+#Redis cache
+resource "azurerm_redis_cache" "sql-redis" {
+  name                = "rediscache${random_string.rediscache.result}"
+  location            = azurerm_resource_group.sql-rg.location
+  resource_group_name = azurerm_resource_group.sql-rg.name
+  capacity            = 1
+  family              = "C"
+  sku_name            = "Standard"
+  enable_non_ssl_port = false
+
+  redis_configuration {
+    maxmemory_reserved = 2
+    maxmemory_delta    = 2
+    maxmemory_policy   = "allkeys-lru"
+  }
+}
+
+resource "azurerm_redis_firewall_rule" "sql-redis-firewall" {
+  name                = "sqlredisfirewall"
+  redis_cache_name    = azurerm_redis_cache.sql-redis.name
+  resource_group_name = azurerm_resource_group.sql-rg.name
+  start_ip            = "0.0.0.0"
+  end_ip              = "0.0.0.0"
+}
+
 #Random string
 resource "random_string" "masterVm" {
   length  = 4
@@ -267,6 +292,15 @@ resource "random_string" "masterVm" {
 #Random string
 resource "random_string" "agentVm" {
   length  = 4
+  numeric = true
+  upper   = false
+  lower   = false
+  special = false
+}
+
+#Random string
+resource "random_string" "rediscache" {
+  length  = 6
   numeric = true
   upper   = false
   lower   = false
