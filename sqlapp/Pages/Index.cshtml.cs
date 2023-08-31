@@ -7,7 +7,7 @@ namespace sqlapp.Pages
 {
     public class IndexModel : PageModel
     {
-        public Task<List<Products>> Products;
+        public Task<List<Product>> Products;
 
         private readonly IProductService _productService;
 
