@@ -9,7 +9,6 @@ using System.Data.SqlClient;
 namespace sqlapp.Services
 {
 
-    // This service will interact with our Product data in the SQL database
     public class ProductService : IProductService
     {
         private readonly IConnectionMultiplexer _redis;
@@ -19,8 +18,8 @@ namespace sqlapp.Services
         }
         private SqlConnection GetConnection()
         {
-            string keyvaultUrl = "https://sqlkeyvault485612878.vault.azure.net/";
-            string secretName = "dbconnectionstring";
+            string keyvaultUrl = "YOUR_KEY_VAULT_URI";
+            string secretName = "SecretNameForConnectionString";
 
             TokenCredential tokenCredential = new DefaultAzureCredential();
             SecretClient secretClient = new SecretClient(new Uri(keyvaultUrl), tokenCredential);
